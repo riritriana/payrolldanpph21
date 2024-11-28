@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Update Employee page</title>
+        <!-- Sertakan CSS (misalnya Bootstrap) jika diperlukan -->
+    </head>
+    <body>
+        <div class="container">
+            <h1>Update Employee</h1>
+
+            <!-- Form untuk Update Employee -->
+            <form th:action="@{/save-update-employee/{id}(id=${employee.id})}" th:object="${employee}" method="post" class="shadow p-4 rounded bg-success p-2 text-dark bg-opacity-25">
+                
+                <!-- Nama Karyawan -->
+                <div class="mb-3">
+                    <label for="employeeName" class="form-label">Employee Name</label>
+                    <input type="text" id="employeeName" th:field="*{name}" class="form-input" required>
+                </div>
+                
+                <!-- Gender -->
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select th:field="*{gender}" id="gender" class="form-select" required>
+                        <option value="Laki-laki" th:selected="${employee.gender == 'Laki-laki'}">Laki-laki</option>
+                        <option value="Perempuan" th:selected="${employee.gender == 'Perempuan'}">Perempuan</option>
+                    </select>
+                </div>
+                
+                <!-- Status -->
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select th:field="*{status}" id="status" class="form-select">
+                        <option value="Single" th:selected="${employee.status == 'Single'}">Single</option>
+                        <option value="Kawin" th:selected="${employee.status == 'Kawin'}">Kawin</option>
+                    </select>
+                </div>
+                
+                <!-- Allowance -->
+                <div class="mb-3">
+                    <label for="allowances" class="form-label">Allowance</label>
+                    <input type="number" id="allowances" th:field="*{allowances}" class="form-input" required>
+                </div>
+
+                <!-- Entry Date -->
+                <div class="mb-3">
+                    <label for="entryDate" class="form-label">Entry Date</label>
+                    <input type="date" id="entryDate" th:field="*{entryDate}" class="form-input" required>
+                </div>
+
+                <!-- Position (dropdown) -->
+                <div class="mb-3">
+                    <label for="position" class="form-label">Position Name</label>
+                    <select th:field="*{position.id}" id="position" class="form-select" required>
+                        <th:block th:each="p : ${position}">
+                            <option th:value="${p.id}" th:text="${p.positionName}" th:selected="${employee.position.id == p.id}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                
+                <!-- Basic Salary -->
+                <div class="mb-3">
+                    <label for="position" class="form-label">Basic Salary</label>
+                    <select th:field="*{position.id}" id="basicSalary" class="form-select" required>
+                        <th:block th:each="p : ${position}">
+                            <option th:value="${p.id}" th:text="${p.basicSalary}" th:selected="${employee.position.id == p.id}"></option>
+                        </th:block>
+                    </select>
+                </div>
+
+                <!-- Tombol submit dan navigasi -->
+                <div class="d-flex justify-content-between">
+                    <a href="/employee" class="btn btn-secondary">Back to List</a>
+                    <button type="submit" class="btn btn-primary">Save Employee</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

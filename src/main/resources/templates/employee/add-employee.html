@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+       <title>Add Employee</title>
+       <!-- Include CSS (like Bootstrap) here -->
+    </head>
+
+    <body>
+    <div class="container">
+        <h1>Add New Employee</h1>
+        <form th:action="@{/save-employee}" th:object="${employee}" method="post">
+            <div class="mb-3">
+                <label for="employeeName" class="form-label">Employee Name</label>
+                <input type="text" id="employeeName" th:field="*{name}" class="form-input" required>
+            </div>
+            <div class="mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select  th:field="*{gender}" id="gender" class="form-select" required>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select th:field="*{status}"  id="status" class="form-select" required>
+                    <option value="Single">Single</option>
+                    <option value="Kawin">Kawin</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="allowances" class="form-label">Allowance</label>
+                <input type="number" id="allowances" th:field="*{allowances}" class="form-input" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="entryDate" class="form-label">Entry Date</label>
+                <input type="date" id="entryDate" th:field="*{entryDate}" class="form-input" required>
+            </div>
+            <div class="mb-3">
+                <label for="position" class="form-label">Position Name</label>
+                <select th:field="*{position.id}" id="position" class="form-select" required>
+                    <th:block th:each="p : ${position}">
+                        <option th:value="${p.id}" th:text="${p.positionName}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="basicSalary" class="form-label">Basic Salary</label>
+                <select name="basicSalary" id="basicSalary" class="form-select" required>
+                    <th:block th:each="p : ${position}">
+                        <option th:value="${p.basicSalary}" th:text="${p.basicSalary}"></option>
+                    </th:block>
+                </select>
+            </div>
+            <div class="d-flex justify-content-between">
+                <a href="/employee" class="btn btn-secondary">Back to List</a>
+                <button type="submit" class="btn btn-primary">Save Employee</button>
+            </div>
+        </form>
+    </div>
+    </body>
+</html>

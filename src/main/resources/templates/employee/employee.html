@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Employee page</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Employee page</h1>
+            <div>
+                <a href="/add-employee">Add new Employee</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee Name</th>
+                        <th>Gender</th>
+                        <th>Status</th>
+                        <th>Entry Date</th>
+                        <th>Allowances</th>
+                        <th>Position Name</th>
+                        <th>Basic Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each=" e : ${employee}">
+                        <tr>
+                            <td th:text="${e.id}"></td>
+                            <td th:text="${e.name}"></td>
+                            <td th:text="${e.gender}"></td>
+                            <td th:text="${e.status}"></td>
+                            <td th:text="${e.entryDate}"></td>
+                            <td th:text="${e.allowances}"></td>
+                            <td th:text="${e.position.positionName}"></td>
+                            <td th:text="${e.position.basicSalary}"></td>
+                            <td>
+                                <a th:href="@{'/update-employee/' + ${e.id}}" class="btn-action">Update</a>
+                                <a th:href="@{'/delete-employee/' + ${e.id}}" class="btn-action">Delete</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

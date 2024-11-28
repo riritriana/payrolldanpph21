@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Position Page </title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>List Posision in Company</h1>
+            <div>
+                <a href="/add-position">Add new position</a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Position Name</th>
+                        <th>Basic Scary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <th:block th:each="position : ${position}">
+                    <tr>
+                        <td th:text="${position.id}"></td>
+                        <td th:text="${position.positionName}"></td>
+                        <td th:text="${position.basicSalary}"></td>
+                        <td>
+                            <a th:href="@{'/update-position/' + ${position.id}}" class="btn-action">Edit</a>
+                            <a th:href="@{'/delete-position/' + ${position.id}}" class="btn-action">Delete</a>
+                        </td>
+                    </tr>
+                    </th:block>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
